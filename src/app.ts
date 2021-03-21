@@ -28,8 +28,7 @@ export class Application {
         this.express.use(DefaultRouter.router);
         this.express.use("/utils", UtilsRouter.router);
 
-        // General error handler
-        // Must be always added at the end
+        // General error handler. Must be always added at the end.
         this.express.use(errorHandler);
     }
 

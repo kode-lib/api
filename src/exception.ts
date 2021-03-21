@@ -9,6 +9,7 @@ export class HTTPException extends Error {
         this.message = message;
     }
 
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     toJSON() {
         return {
             status_code: this.statusCode,
