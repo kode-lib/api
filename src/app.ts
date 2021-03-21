@@ -5,6 +5,7 @@ import cors from "cors";
 import morgan from "morgan";
 import compression from "compression";
 
+import { errorHandler } from "./middleware/error_handler"
 import * as DefaultRouter from "./routers/default"
 import * as UtilsRouter from "./routers/utils";
 
@@ -23,9 +24,13 @@ export class Application {
         this.express.use(cors());
         this.express.use(compression());
         this.express.use(express.json());
-
+        
         this.express.use(DefaultRouter.router);
         this.express.use("/utils", UtilsRouter.router);
+
+        // General error handler
+        // Must be always added at the end
+        this.express.use(errorHandler);
     }
 
     run(port: number) : void {

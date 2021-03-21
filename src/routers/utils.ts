@@ -1,21 +1,26 @@
-import { Router, Request, Response } from "express";
+import { Router, Request, Response, NextFunction } from "express";
 
 import { Octokit } from "@octokit/rest";
 
-import { HTTPException } from "../exception";
+import { HTTPNotFoundException } from "../exception";
 
 export const router = Router();
 
-router.get("/app/latest", async (req: Request, res: Response) => {
+router.get("/app/latest", async (_: Request, res: Response, next: NextFunction) => {
     const octokit = new Octokit();
-    const release = await octokit.repos.getLatestRelease({
-        owner: "marghidanu",
-        repo: "werk"
-    });
 
-    const assets = release.data.assets.filter(value => value.name === "werk-linux-x64");
-    if (!assets.length)
-        throw new HTTPException(404, "Asset not found!");
+    try {
+        const release = await octokit.repos.getLatestRelease({
+            owner: "marghidanu",
+            repo: "werk"
+        });
 
-    res.send(assets[0].browser_download_url);
+        const assets = release.data.assets.filter(value => value.name === "werk-linux-x64");
+        if (!assets.length)
+            next(new HTTPNotFoundException("Asset not found!"));
+
+        res.send(assets[0].browser_download_url);
+    } catch (e) {
+        next(new HTTPNotFoundException("Release not found!"));
+    }
 });
