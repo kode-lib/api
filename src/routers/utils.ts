@@ -6,13 +6,13 @@ import { HTTPNotFoundException } from "../exception";
 
 export const router = Router();
 
-router.get("/app/latest", async (_: Request, res: Response, next: NextFunction) => {
+router.get("/app/:appName/latest", async (req: Request, res: Response, next: NextFunction) => {
     const octokit = new Octokit();
 
     try {
         const release = await octokit.repos.getLatestRelease({
             owner: "marghidanu",
-            repo: "werk"
+            repo: req.params.appName,
         });
 
         const assets = release.data.assets.filter(value => value.name === "werk-linux-x64");
