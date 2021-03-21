@@ -1,21 +1,13 @@
-import 'source-map-support/register';
-
-// std
-import * as http from 'http';
-
-// 3p
-import { Config, createApp, displayServerURL } from '@foal/core';
-
-// App
-import { AppController } from './app/app.controller';
+import { Application } from "./app"
+import { Config } from "./config"
 
 async function main() {
-  const app = await createApp(AppController);
+    const app = new Application();
 
-  const httpServer = http.createServer(app);
-  const port = Config.get('port', 'number', 3001);
-  httpServer.listen(port, () => displayServerURL(port));
+    app.run(Config.port);
 }
 
-main()
-  .catch(err => { console.error(err.stack); process.exit(1); });
+main().catch(err => {
+    console.error(err.stack);
+    process.exit(1);
+});
