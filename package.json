@@ -7,7 +7,7 @@
     "build": "tsc",
     "start": "node ./build/index.js",
     "develop": "nodemon ./src/index.ts",
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "eslint . --ext .ts"
   },
   "repository": {
