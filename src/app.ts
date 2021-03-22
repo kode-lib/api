@@ -1,4 +1,5 @@
 import express from "express";
+import { Server } from "http";
 
 import helmet from "helmet";
 import cors from "cors";
@@ -26,7 +27,7 @@ export class Application {
         this.express.use(compression());
         this.express.use(express.json());
         this.express.use(expressPrometheusMiddleware({}));
-        
+
         this.express.use(DefaultRouter.router);
         this.express.use("/utils", UtilsRouter.router);
 
@@ -34,8 +35,8 @@ export class Application {
         this.express.use(errorHandler);
     }
 
-    run(port: number) : void {
-        this.express.listen(port, () => {
+    run(port: number): Server {
+        return this.express.listen(port, () => {
             console.log(`Application started on port ${port}`);
         });
     }
