@@ -1,5 +1,4 @@
 import { Router, Request, Response, NextFunction } from "express";
-
 import { Octokit } from "@octokit/rest";
 
 import { HTTPNotFoundException } from "../exception";

@@ -2,7 +2,7 @@ import { Application } from "./app"
 import { Config } from "./config"
 
 async function main() {
-    (new Application()).run(Config.port);
+    (new Application({})).run(Config.port);
 }
 
 main().catch(err => {

@@ -11,18 +11,26 @@ import { errorHandler } from "./middleware/error_handler"
 import * as DefaultRouter from "./routers/default"
 import * as UtilsRouter from "./routers/utils";
 
+interface IApplicationConfig {
+    disableLogging?: boolean
+}
+
 export class Application {
     public readonly express: express.Express;
+    public readonly config: IApplicationConfig
 
-    constructor() {
+    constructor(config: IApplicationConfig) {
+        this.config = config;
         this.express = express();
 
         this.init();
     }
 
     private init() {
+        if ((this.config.disableLogging === undefined) || !this.config.disableLogging)
+            this.express.use(morgan("short"));
+
         this.express.use(helmet());
-        this.express.use(morgan("short"));
         this.express.use(cors());
         this.express.use(compression());
         this.express.use(express.json());
