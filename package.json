@@ -51,5 +51,13 @@
     "helmet": "^4.4.1",
     "morgan": "^1.10.0",
     "prom-client": "^13.1.0"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/__tests__/**/*.ts?(x)",
+      "**/?(*.)+(spec|test).ts?(x)"
+    ]
   }
 }
