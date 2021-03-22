@@ -3,10 +3,10 @@ import { Application } from "../app";
 
 const app = (new Application({ disableLogging: true })).express;
 
-describe("Testing utils routes", () => {
-    it("should retrieve latest version", async () => {
+describe("Testing apps routes", () => {
+    it("should retrieve latest version for app", async () => {
         await supertest(app)
-            .get("/utils/app/werk/latest")
+            .get("/apps/werk/latest")
             .expect(200);
     });
 });

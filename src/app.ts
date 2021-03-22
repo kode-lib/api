@@ -9,7 +9,7 @@ import expressPrometheusMiddleware from "express-prometheus-middleware"
 
 import { errorHandler } from "./middleware/error_handler"
 import * as DefaultRouter from "./routers/default"
-import * as UtilsRouter from "./routers/utils";
+import * as AppsRouter from "./routers/apps";
 
 interface IApplicationConfig {
     disableLogging?: boolean
@@ -37,7 +37,7 @@ export class Application {
         this.express.use(expressPrometheusMiddleware({}));
 
         this.express.use(DefaultRouter.router);
-        this.express.use("/utils", UtilsRouter.router);
+        this.express.use(AppsRouter.router);
 
         // General error handler. Must be always added at the end.
         this.express.use(errorHandler);

@@ -1,11 +1,11 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { Octokit } from "@octokit/rest";
 
-import { HTTPNotFoundException } from "../exception";
+import { NotFoundException } from "../exception";
 
 export const router = Router();
 
-router.get("/app/:appName/latest", async (req: Request, res: Response, next: NextFunction) => {
+router.get("/apps/:appName/latest", async (req: Request, res: Response, next: NextFunction) => {
     const octokit = new Octokit();
 
     try {
@@ -16,10 +16,10 @@ router.get("/app/:appName/latest", async (req: Request, res: Response, next: Nex
 
         const assets = release.data.assets.filter(value => value.name === "werk-linux-x64");
         if (!assets.length)
-            next(new HTTPNotFoundException("Asset not found!"));
+            next(new NotFoundException("Asset not found!"));
 
         res.send(assets[0].browser_download_url);
     } catch (e) {
-        next(new HTTPNotFoundException("Release not found!"));
+        next(new NotFoundException("Release not found!"));
     }
 });
