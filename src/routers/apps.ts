@@ -5,13 +5,13 @@ import { NotFoundException } from "../exceptions";
 
 export const router = Router();
 
-router.get("/apps/:appName/latest", async (req: Request, res: Response, next: NextFunction) => {
+router.get("/apps/werk/latest", async (req: Request, res: Response, next: NextFunction) => {
     const octokit = new Octokit();
 
     try {
         const release = await octokit.repos.getLatestRelease({
             owner: "marghidanu",
-            repo: req.params.appName,
+            repo: "werk",
         });
 
         const assets = release.data.assets.filter(value => value.name === "werk-linux-x64");
@@ -20,6 +20,6 @@ router.get("/apps/:appName/latest", async (req: Request, res: Response, next: Ne
 
         res.send(assets[0].browser_download_url);
     } catch (e) {
-        next(new NotFoundException("Release not found!"));
+        next(new NotFoundException("Cannot retrieve release!"));
     }
 });
