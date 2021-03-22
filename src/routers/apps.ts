@@ -1,7 +1,7 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { Octokit } from "@octokit/rest";
 
-import { NotFoundException } from "../exception";
+import { NotFoundException } from "../exceptions";
 
 export const router = Router();
 
