@@ -37,7 +37,7 @@ export class Application {
         this.express.use(expressPrometheusMiddleware({}));
 
         this.express.use(DefaultRouter.router);
-        this.express.use(AppsRouter.router);
+        this.express.use("/v1", AppsRouter.router);
 
         // General error handler. Must be always added at the end.
         this.express.use(errorHandler);

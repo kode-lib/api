@@ -6,7 +6,7 @@ const app = (new Application({ disableLogging: true })).express;
 describe("Testing apps routes", () => {
     it("should retrieve latest version for app", async () => {
         await supertest(app)
-            .get("/apps/werk/latest")
+            .get("/v1/apps/werk/latest")
             .expect(200);
     });
 });
