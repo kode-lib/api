@@ -11,7 +11,7 @@ The configurations is done via `dotenv` so you can create a `.env` file in the r
 
 **PORT**
 
-Application port. Defaults to 400
+Application port. Defaults to 4000
 
 ## Development environment
 
