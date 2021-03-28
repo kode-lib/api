@@ -1,14 +1,14 @@
-import { Router } from "express";
+import { Router } from 'express';
 
-import * as RootRouter from "./root"
-import * as AppsRouter from "./apps";
-import * as PrivateRouter from "./private";
+import * as RootRouter from './root';
+import * as AppsRouter from './apps';
+import * as PrivateRouter from './private';
 
-export const DefaultRouter = Router()
+export const DefaultRouter = Router();
 
-DefaultRouter.use("/", RootRouter.router);
+DefaultRouter.use('/', RootRouter.router);
 
 const apiRouter = Router();
-apiRouter.use("/apps", AppsRouter.router);
-apiRouter.use("/private", PrivateRouter.router);
-DefaultRouter.use("/v1", apiRouter)
+apiRouter.use('/apps', AppsRouter.router);
+apiRouter.use('/private', PrivateRouter.router);
+DefaultRouter.use('/v1', apiRouter);

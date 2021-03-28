@@ -1,12 +1,10 @@
-import supertest from "supertest";
-import { Application } from "../app";
+import supertest from 'supertest';
+import { Application } from '../app';
 
-const app = (new Application({ disableLogging: true })).express;
+const app = new Application({ disableLogging: true }).express;
 
-describe("Testing apps routes", () => {
-    it("should retrieve latest version for app", async () => {
-        await supertest(app)
-            .get("/v1/apps/werk/latest")
-            .expect(200);
+describe('Testing apps routes', () => {
+    it('should retrieve latest version for app', async () => {
+        await supertest(app).get('/v1/apps/werk/latest').expect(200);
     });
 });
