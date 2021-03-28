@@ -9,6 +9,6 @@ export const DefaultRouter = Router()
 DefaultRouter.use("/", RootRouter.router);
 
 const apiRouter = Router();
-apiRouter.use(AppsRouter.router);
-apiRouter.use(PrivateRouter.router);
+apiRouter.use("/apps", AppsRouter.router);
+apiRouter.use("/private", PrivateRouter.router);
 DefaultRouter.use("/v1", apiRouter)

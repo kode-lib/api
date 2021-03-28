@@ -5,7 +5,7 @@ import { NotFoundException } from "../exceptions";
 
 export const router = Router();
 
-router.get("/apps/werk/latest", async (req: Request, res: Response, next: NextFunction) => {
+router.get("/werk/latest", async (req: Request, res: Response, next: NextFunction) => {
     const octokit = new Octokit();
 
     try {
