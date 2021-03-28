@@ -10,7 +10,5 @@ router.get("/", (_: Request, res: Response) => {
 });
 
 router.get("/health", (_: Request, res: Response) => {
-    res.json({
-        status: "OK"
-    });
+    res.json({ status: "OK" });
 });
