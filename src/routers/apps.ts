@@ -5,11 +5,11 @@ import { NotFoundException } from '../exceptions';
 
 export const router = Router();
 
-router.get(
-    '/werk/latest',
-    async (req: Request, res: Response, next: NextFunction) => {
-        const octokit = new Octokit();
+const octokit = new Octokit();
 
+router.get(
+    '/werk/latest/url',
+    async (req: Request, res: Response, next: NextFunction) => {
         try {
             const release = await octokit.repos.getLatestRelease({
                 owner: 'marghidanu',
@@ -22,6 +22,22 @@ router.get(
             if (!assets.length) next(new NotFoundException('Asset not found!'));
 
             res.send(assets[0].browser_download_url);
+        } catch (e) {
+            next(new NotFoundException('Cannot retrieve release!'));
+        }
+    },
+);
+
+router.get(
+    '/werk/latest/version',
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const release = await octokit.repos.getLatestRelease({
+                owner: 'marghidanu',
+                repo: 'werk',
+            });
+
+            res.send(release.data.tag_name);
         } catch (e) {
             next(new NotFoundException('Cannot retrieve release!'));
         }
