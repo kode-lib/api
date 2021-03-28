@@ -13,7 +13,6 @@ import expressPrometheusMiddleware from "express-prometheus-middleware"
 
 import { DefaultRouter } from "./routers"
 import { errorHandler } from "./middleware/error_handler"
-import { stringify } from "node:querystring";
 
 interface IApplicationOptions {
     disableLogging?: boolean
